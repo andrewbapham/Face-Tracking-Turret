@@ -11,14 +11,21 @@ eyeCascade = cv2.CascadeClassifier(cascPath)
 # Makes log file
 log.basicConfig(filename='webcam.log',level=log.INFO)
 
-# 0 is main webcam, 1 is laptop cam, 2 is droidcam
-video_capture = cv2.VideoCapture(1)
+# 0 is default webcam
+video_capture = cv2.VideoCapture(0)
 anterior = 0
 
+#Replace COM port and pins with whatever your hardware is connected on
+serPort = 'COM5'
+pinX = 'd:9:s'
+pinY = 'd:7:s'
+pinShoot = 'd:8:s'
+
+
 board = pyfirmata.Arduino('COM5')
-servoX = board.get_pin('d:9:s')
-servoShoot = board.get_pin('d:8:s')
-servoY = board.get_pin('d:7:s')
+servoX = board.get_pin(pinX)
+servoY = board.get_pin(pinY)
+servoShoot = board.get_pin(pinShoot)
 
 startTime = time.time()
 endingTime = time.time()
